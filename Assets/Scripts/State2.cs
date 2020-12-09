@@ -22,7 +22,7 @@ public class State2 : IBaseState<NpcState>
         _animator.SetTrigger(Anim);
     }
 
-    public NpcState Update(StateMachine<NpcState> stateMachine)
+    public NpcState Update(StateMachine<NpcState> sm)
     {
         _counter += Time.deltaTime;
 
@@ -33,7 +33,7 @@ public class State2 : IBaseState<NpcState>
             return NpcState.State1;
         }
 
-        return stateMachine.CurrentState;
+        return sm.CurrentState;
     }
 
     public void Stop()
