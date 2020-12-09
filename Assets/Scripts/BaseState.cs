@@ -9,5 +9,9 @@ public abstract class BaseState
         GameObject = gameObject;
     }
 
+    public abstract void Start();
+    
     public abstract NpcState Tick();
+    
+    public abstract void Stop();
 }

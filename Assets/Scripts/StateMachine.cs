@@ -15,6 +15,8 @@ public class StateMachine : MonoBehaviour
         _states = states;
 
         CurrentState = initial;
+        
+        _states[CurrentState].Start();
     }
 
     private void Update()
@@ -23,7 +25,11 @@ public class StateMachine : MonoBehaviour
 
         if (nextState == CurrentState) return;
         
+        _states[CurrentState].Stop();
+        
         CurrentState = nextState;
+        
+        _states[CurrentState].Start();
             
         OnStateChanged?.Invoke(CurrentState);
     }
