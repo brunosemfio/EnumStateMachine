@@ -23,4 +23,9 @@ public class Npc : MonoBehaviour
 
         _stateMachine.SetStates(states, initialState);
     }
+
+    private void FixedUpdate()
+    {
+        Debug.Log($"Current State: {_stateMachine.CurrentState}");
+    }
 }

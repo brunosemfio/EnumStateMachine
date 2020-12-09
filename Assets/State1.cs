@@ -13,8 +13,6 @@ public class State1 : BaseState
 
     public override NpcState Tick()
     {
-        Debug.Log($"{GameObject.name} no state '{ToString()}'");
-        
         _counter += Time.deltaTime;
 
         if (_counter >= 2f)
