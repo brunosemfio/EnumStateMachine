@@ -14,7 +14,7 @@ public class Npc : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        
+
         _stateMachine = GetComponent<NpcStateMachine>();
     }
 

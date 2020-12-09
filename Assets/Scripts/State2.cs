@@ -3,9 +3,9 @@
 public class State2 : IBaseState<NpcState>
 {
     private static readonly int Anim = Animator.StringToHash("Horizontal");
-    
+
     private readonly Npc _npc;
-    
+
     private readonly Animator _animator;
 
     private float _counter;
@@ -13,7 +13,7 @@ public class State2 : IBaseState<NpcState>
     public State2(Npc npc, Animator animator)
     {
         _npc = npc;
-        
+
         _animator = animator;
     }
 
