@@ -1,6 +1,10 @@
-﻿public class State1 : BaseState
+﻿using UnityEngine;
+
+public class State1 : BaseState
 {
-    private Npc _npc;
+    private readonly Npc _npc;
+    
+    private float _counter;
     
     public State1(Npc npc) : base(npc.gameObject)
     {
@@ -9,6 +13,17 @@
 
     public override NpcState Tick()
     {
+        Debug.Log($"{_npc.name} no state '{nameof(State1)}'");
+        
+        _counter += Time.deltaTime;
+
+        if (_counter >= 2f)
+        {
+            _counter = 0f;
+
+            return NpcState.State2;
+        }
+        
         return NpcState.State1;
     }
 }
