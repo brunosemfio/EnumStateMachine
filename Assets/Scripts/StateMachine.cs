@@ -2,31 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+public abstract class StateMachine<T> : MonoBehaviour where T : Enum
 {
-    private Dictionary<NpcState, IBaseState> _states;
-    
-    public NpcState CurrentState { get; private set; }
+    private Dictionary<T, IBaseState<T>> _states;
 
-    public event Action<NpcState> OnStateChanged;
+    public T CurrentState { get; private set; }
 
-    public void SetStates(Dictionary<NpcState, IBaseState> states, NpcState initial)
+    public event Action<T> OnStateChanged;
+
+    public void SetStates(Dictionary<T, IBaseState<T>> states, T initial)
     {
         _states = states;
 
         CurrentState = initial;
-        
+
         _states[CurrentState].Start();
     }
 
     private void Update()
     {
-        var nextState = _states[CurrentState].Tick();
+        var nextState = _states[CurrentState].Update(this);
 
-        if (nextState != CurrentState) ChanceState(nextState);
+        if (!Equals(nextState, CurrentState)) ChanceState(nextState);
     }
 
-    private void ChanceState(NpcState nextState)
+    private void ChanceState(T nextState)
     {
         _states[CurrentState].Stop();
 

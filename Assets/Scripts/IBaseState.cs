@@ -1,8 +1,10 @@
-﻿public interface IBaseState
+﻿using System;
+
+public interface IBaseState<T> where T : Enum
 {
     void Start();
 
-    NpcState Tick();
+    T Update(StateMachine<T> stateMachine);
 
     void Stop();
 }

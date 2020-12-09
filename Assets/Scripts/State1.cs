@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class State1 : IBaseState
+public class State1 : IBaseState<NpcState>
 {
     private static readonly int Anim = Animator.StringToHash("Vertical");
     
@@ -22,7 +22,7 @@ public class State1 : IBaseState
         _animator.SetTrigger(Anim);
     }
 
-    public NpcState Tick()
+    public NpcState Update(StateMachine<NpcState> stateMachine)
     {
         _counter += Time.deltaTime;
 
@@ -33,7 +33,7 @@ public class State1 : IBaseState
             return NpcState.State2;
         }
         
-        return NpcState.State1;
+        return stateMachine.CurrentState;
     }
 
     public void Stop()

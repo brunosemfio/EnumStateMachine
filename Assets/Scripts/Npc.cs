@@ -2,10 +2,10 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(StateMachine))]
+[RequireComponent(typeof(NpcStateMachine))]
 public class Npc : MonoBehaviour
 {
-    private StateMachine _stateMachine;
+    private NpcStateMachine _stateMachine;
 
     private Animator _animator;
 
@@ -15,12 +15,12 @@ public class Npc : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         
-        _stateMachine = GetComponent<StateMachine>();
+        _stateMachine = GetComponent<NpcStateMachine>();
     }
 
     private void Start()
     {
-        var states = new Dictionary<NpcState, IBaseState>
+        var states = new Dictionary<NpcState, IBaseState<NpcState>>
         {
             {NpcState.State1, new State1(this, _animator)},
             {NpcState.State2, new State2(this, _animator)}
