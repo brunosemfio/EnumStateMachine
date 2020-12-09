@@ -15,7 +15,7 @@ public class Npc : MonoBehaviour
 
     private void Start()
     {
-        var states = new Dictionary<NpcState, BaseState>()
+        var states = new Dictionary<NpcState, BaseState>
         {
             {NpcState.State1, new State1(this)},
             {NpcState.State2, new State2(this)}
