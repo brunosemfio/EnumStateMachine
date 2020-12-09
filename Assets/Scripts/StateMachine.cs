@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    private Dictionary<NpcState, BaseState> _states;
+    private Dictionary<NpcState, IBaseState> _states;
     
     public NpcState CurrentState { get; private set; }
 
     public event Action<NpcState> OnStateChanged;
 
-    public void SetStates(Dictionary<NpcState, BaseState> states, NpcState initial)
+    public void SetStates(Dictionary<NpcState, IBaseState> states, NpcState initial)
     {
         _states = states;
 
@@ -23,14 +23,17 @@ public class StateMachine : MonoBehaviour
     {
         var nextState = _states[CurrentState].Tick();
 
-        if (nextState == CurrentState) return;
-        
+        if (nextState != CurrentState) ChanceState(nextState);
+    }
+
+    private void ChanceState(NpcState nextState)
+    {
         _states[CurrentState].Stop();
-        
+
         CurrentState = nextState;
-        
+
         _states[CurrentState].Start();
-            
+
         OnStateChanged?.Invoke(CurrentState);
     }
 }

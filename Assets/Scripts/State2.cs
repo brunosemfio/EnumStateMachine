@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class State2 : BaseState
+public class State2 : IBaseState
 {
     private static readonly int Anim = Animator.StringToHash("Horizontal");
     
@@ -10,19 +10,19 @@ public class State2 : BaseState
 
     private float _counter;
 
-    public State2(Npc npc, Animator animator) : base(npc.gameObject)
+    public State2(Npc npc, Animator animator)
     {
         _npc = npc;
         
         _animator = animator;
     }
 
-    public override void Start()
+    public void Start()
     {
         _animator.SetTrigger(Anim);
     }
 
-    public override NpcState Tick()
+    public NpcState Tick()
     {
         _counter += Time.deltaTime;
 
@@ -36,7 +36,7 @@ public class State2 : BaseState
         return NpcState.State2;
     }
 
-    public override void Stop()
+    public void Stop()
     {
         _animator.ResetTrigger(Anim);
     }
